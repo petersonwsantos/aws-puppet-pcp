@@ -1,2 +1,2 @@
-# aws-puppet-pcp
-ViRti - Puppet Control Repository
+# virti-puppet-pcp
+ViRTi - Puppet Control Repository
