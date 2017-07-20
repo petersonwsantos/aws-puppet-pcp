@@ -1,0 +1,10 @@
+---
+version: 5
+hierarchy:
+  - name: "OS values"
+    path: "%{facts.os.family}.yaml"
+  - name: "Common values"
+    path: "common.yaml"
+defaults:
+  data_hash: yaml_data
+  datadir: hieradata

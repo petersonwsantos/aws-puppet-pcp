@@ -1,0 +1,7 @@
+---
+# (1.b).......................... CONFIG DEFAULT PACKAGES
+pp_essential::packages::list_packages:
+  - 'iptraf'
+  - 'nmap'
+  - 'tree'
+# ................................................................................

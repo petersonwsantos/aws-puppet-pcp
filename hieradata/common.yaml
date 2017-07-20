@@ -1,0 +1,130 @@
+---
+# VARIABLES
+_: &password_hash '$6$BoqKnYjt9ZdsWXx.$Snek//zPkyJ3znMiCgRBmQznbcgmm1yZzptY.fhY8IdclDuZKNVBKAImMJMj9Ge0q5/xv2IxP.erPKky4MO30.'
+
+#_: &puppetserver_ip '192.168.0.224'
+#_: &puppetserver_fqdn 'server224.example.local'
+#_: &puppetserver_host_aliases ['puppet','server224']#
+
+#_: &ad_server_ip '192.168.0.230'
+#_: &ad_fqdn 'server230.example.local'
+#_: &ad_host_aliases ['server230']
+
+  
+# ................................................................................
+# (1).......................... ESSENTIAL CONFIG .................................
+
+# (1.a) ..........................  CONFIG /etc/hosts
+pp_essential::hosts::list_hosts:
+  localhost.localdomain:
+    host_aliases: ['localhost']
+    ip: '127.0.0.1'
+  #*puppetserver_fqdn:
+  #  ip: *puppetserver_ip
+  #  host_aliases: *puppetserver_host_aliases
+  #"%{::fqdn}":
+  #  ip: "%{::ipaddress}"
+  #  host_aliases: ['%{::hostname}']
+  #*ad_fqdn:
+  #  ip: *ad_server_ip
+  #  host_aliases: *ad_host_aliases
+# ................................................................................
+
+
+
+# (1.b).......................... CONFIG DEFAULT PACKAGES
+#pp_essential::packages::list_packages:
+#  - 'iptraf'
+#  - 'nmap'
+# windows 
+#pp_essential::packages::list_packages:
+#  notepadplusplus:
+#    ensure:   '6.9.2'
+#    provider: 'chocolatey'
+#    source:   'http://192.168.10.200/chocolatey/chocolatey'
+# ................................................................................
+
+
+# (1.c).......................... CONFIG DEFAULT GROUPS
+pp_essential::groups::list_groups:
+  sysadmins01:
+    gid: 1991
+  sysadmins02:
+    gid: 1992
+  sysadmins03:
+    gid: 1993
+# ................................................................................
+
+
+# (1.d).......................... CONFIG DEFAULT USERS
+pp_essential::users::list_users:
+  nivel1:
+    uid: 9991
+    password: *password_hash
+    password_max_age: 99999
+    password_min_age: 0
+    groups:  ['sysadmins01']
+  nivel2:
+    uid: 9992
+    password: *password_hash
+    password_max_age: 99999
+    password_min_age: '0'
+    groups:  ['sysadmins01', 'sysadmins02']
+  nivel3:
+    uid: 9993
+    password: *password_hash
+    password_max_age: 99999
+    password_min_age: '0'
+    groups:  ['sysadmins01', 'sysadmins02', 'sysadmins03']
+# ................................................................................
+
+
+# (1.e).......................... CONFIG DEFAULT USERS
+  #pp_essential::sudoers::sudoers_template: "pp_essential/apagar.erb"
+# ................................................................................
+ 
+# (1.f).......................... CONFIG CRON
+cron::job:
+  'yumupdate':
+    command: 'yum update -y'
+    minute: '*/30'
+    hour: '*'
+    date: '*'
+    month: '*'
+    weekday: '*'
+    user: root
+    environment:
+      - 'MAILTO=root'
+      - 'PATH="/usr/bin:/bin"'
+    description: 'Linux update'
+
+# ................................................................................
+
+ 
+
+# ................................................................................
+# (2).......................... WEBSERVER CONFIG .................................
+
+# (2.a).......................... CONFIG VHOST
+#apache::vhosts:
+#  host1:
+#    priority: "10"
+#    vhost_name: "intranet.host1.com"
+#    port: "80"
+#    docroot: "/var/www1"
+# ................................................................................
+
+
+# ................................................................................
+# (3)............................. NTP ...........................................
+
+# (3.a).......................... CONFIG NTP
+ntp::package_ensure: latest
+ntp::service_enable: true
+ntp::service_ensure: running
+ntp::servers:
+  - 8.8.8.8 iburst
+  - 8.8.4.4 iburst
+  
+# ................................................................................
+

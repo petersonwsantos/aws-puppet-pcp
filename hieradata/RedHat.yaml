@@ -1,0 +1,9 @@
+---
+
+# (1.b).......................... CONFIG DEFAULT PACKAGES
+pp_essential::packages::list_packages:
+  - 'net-tools'
+  - 'tree'
+  - 'epel-release'
+  - 'git-core'
+# ................................................................................

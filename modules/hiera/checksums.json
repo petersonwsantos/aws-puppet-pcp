@@ -1,0 +1,15 @@
+{
+  "CHANGELOG.md": "ca9fc85e9536be9562a79cbd82efdf55",
+  "Gemfile": "f878b9326aec552bb425b44813607c3b",
+  "LICENCE": "eb3069110c76ed747b347cf7fb506956",
+  "README.md": "c0ca505135964bff6a296de8a565a190",
+  "Rakefile": "de8eeacfe1fbbc6a6f4d89adfc98bcaf",
+  "manifests/eyaml.pp": "a776e4cb6297520b5978465565fea260",
+  "manifests/init.pp": "5f12c82ff4d430c6e16f942c6fd9aa48",
+  "manifests/params.pp": "ef8342aad5f826188f42055b797690c3",
+  "metadata.json": "7a9e895f400644e6064fba6529218f4c",
+  "spec/classes/hiera_spec.rb": "f8b54d58df58eeb3e20aa201f0d8f897",
+  "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+  "templates/hiera.yaml.erb": "26c00947dc2eb048606249c9626b1805",
+  "tests/init.pp": "61b7aa1a851c858a5ef0246b047c85bd"
+}
